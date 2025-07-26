@@ -3,10 +3,14 @@ import { ENV } from "./config/env.js";
 import {db} from "./config/db.js"; // Adjust the import path as necessary 
 import {favoritesTable} from "./db/schema.js"; // Adjust the import path as necessary
 import { eq, and } from "drizzle-orm";
+import job from "./config/cron.js";
+
 // import { drizzle } from "drizzle-orm/neon-http";
 
 const app =express();
 const PORT = ENV.PORT || 5001;
+
+if(ENV_NODE_ENV === "production") job.start();
 
 app.use(express.json());
 
